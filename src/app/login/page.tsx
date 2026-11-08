@@ -22,12 +22,18 @@ const LoginPage = () => {
             ...userdata,
             callbackURL: '/'
         })
-        if(data){
+        if (data) {
             toast.success('Login successfully')
         }
-        if(error){
+        if (error) {
             toast.error(error.message || 'Something wrong!')
         }
+    }
+
+    const handleGooglebtn = async () => {
+        await authClient.signIn.social({
+            provider: "google",
+        })
     }
 
     return (
@@ -129,6 +135,7 @@ const LoginPage = () => {
                     {/* Google Button */}
                     <button
                         type="button"
+                        onClick={handleGooglebtn}
                         className="w-full h-11 border border-gray-200 bg-white hover:bg-gray-50 flex items-center justify-center gap-2 text-sm text-gray-800 transition"
                     >
                         {/* Google Icon */}

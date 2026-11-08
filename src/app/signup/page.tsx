@@ -19,23 +19,28 @@ export default function SignupPage() {
     const [showPassword, setShowPassword] = useState(false);
     const [showConfirmPassword, setShowConfirmPassword] = useState(false);
 
-    const handleSignUp =async (e: React.FormEvent<HTMLFormElement>) => {
+    const handleSignUp = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault()
-        const formData=new FormData(e.currentTarget)
-        const userdata=Object.fromEntries(formData.entries()) as {name:string, email:string, password:string}
-        
+        const formData = new FormData(e.currentTarget)
+        const userdata = Object.fromEntries(formData.entries()) as { name: string, email: string, password: string }
+
         const { data, error } = await authClient.signUp.email({
             ...userdata,
-            callbackURL:'/'
+            callbackURL: '/'
         })
-        if(data){
+        if (data) {
             toast.success(' Account Create Successfully')
             redirect('/')
         }
-        if(error){
-            toast.error( error.message || 'Something went wrong!' )
+        if (error) {
+            toast.error(error.message || 'Something went wrong!')
         }
 
+    }
+    const handleGooglebtn = async () => {
+        await authClient.signIn.social({
+            provider: "google",
+        })
     }
 
     return (
@@ -74,6 +79,7 @@ export default function SignupPage() {
                                 <input
                                     type="text"
                                     name="name"
+                                    required
                                     placeholder="Enter your name"
                                     className="w-full h-9 sm:h-10 bg-[#f5f7f8] border border-gray-200 pl-9 pr-3 text-sm text-gray-700 outline-none focus:border-[#18a3c1] focus:ring-1 focus:ring-[#18a3c1] transition"
                                 />
@@ -95,6 +101,7 @@ export default function SignupPage() {
                                 <input
                                     type="email"
                                     name="email"
+                                    required
                                     placeholder="Enter your email"
                                     className="w-full h-9 sm:h-10 bg-[#f5f7f8] border border-gray-200 pl-9 pr-3 text-sm text-gray-700 outline-none focus:border-[#18a3c1] focus:ring-1 focus:ring-[#18a3c1] transition"
                                 />
@@ -116,6 +123,7 @@ export default function SignupPage() {
                                 <input
                                     type={showPassword ? "text" : "password"}
                                     name="password"
+                                    required
                                     placeholder="Create a password"
                                     className="w-full h-9 sm:h-10 bg-[#f5f7f8] border border-gray-200 pl-9 pr-10 text-sm text-gray-700 outline-none focus:border-[#18a3c1] focus:ring-1 focus:ring-[#18a3c1] transition"
                                 />
@@ -148,7 +156,8 @@ export default function SignupPage() {
 
                                 <input
                                     type={showConfirmPassword ? "text" : "password"}
-                                     name="password"
+                                    name="password"
+                                    required
                                     placeholder="Confirm your password"
                                     className="w-full h-9 sm:h-10 bg-[#f5f7f8] border border-gray-200 pl-9 pr-10 text-sm text-gray-700 outline-none focus:border-[#18a3c1] focus:ring-1 focus:ring-[#18a3c1] transition"
                                 />
@@ -193,6 +202,7 @@ export default function SignupPage() {
                     {/* Google Button */}
                     <button
                         type="button"
+                        onClick={handleGooglebtn}
                         className="w-full h-11 border border-gray-200 bg-white hover:bg-gray-50 flex items-center justify-center gap-2 text-sm text-gray-800 transition"
                     >
                         {/* Google Icon */}
