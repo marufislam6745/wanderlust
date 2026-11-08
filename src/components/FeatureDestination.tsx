@@ -5,7 +5,7 @@ import React from 'react';
 
 
 const FeatureDestination = async () => {
-    const res = await fetch(`http://localhost:5000/featureDestinations`)
+    const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/featureDestinations`)
     const data: Tour[] = await res.json()
     return (
         <div className='max-w-7xl mx-auto'>

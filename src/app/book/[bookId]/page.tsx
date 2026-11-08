@@ -23,7 +23,7 @@ const Detailspage = async ({ params }: { params: Promise<{ bookId: string }> }) 
         headers:await headers()
     })
     //console.log(jwtToken?.token)
-    const res = await fetch(`http://localhost:5000/destinations/${bookId}`,{
+    const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/destinations/${bookId}`,{
         headers:{
             authorization: `Bearer ${jwtToken?.token}`,
         }

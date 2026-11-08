@@ -40,7 +40,7 @@ export function Editdestination({ data }: { data: Tour }) {
         e.preventDefault();
         
         const { _id, ...updateData } = form
-        const res = await fetch(`http://localhost:5000/destinations/${data._id}`, {
+        const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/destinations/${data._id}`, {
             method: "PATCH",
             headers: {
                 "Content-Type": "application/json",

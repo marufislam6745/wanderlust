@@ -13,7 +13,7 @@ const DeleteBooking = ({ data }: { data: dataType }) => {
     const router = useRouter()
 
     const handlecancelbtn = async () => {
-        const res = await fetch(`http://localhost:5000/bookings/${data._id}`, {
+        const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/bookings/${data._id}`, {
             method: "DELETE"
         })
         const cancelBooking = await res.json()

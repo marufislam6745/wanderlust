@@ -23,7 +23,7 @@ const MyBooking = async () => {
         headers: await headers()
     })
     //console.log(session?.user)
-    const res = await fetch(`http://localhost:5000/bookings/${session?.user.email}`)
+    const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/bookings/${session?.user.email}`)
     const datas = await res.json()
     //console.log(data)
     return (
